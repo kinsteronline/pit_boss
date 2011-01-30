@@ -1,6 +1,9 @@
 /* The Pit Boss */
 
-var http = require('http');
+require.paths.unshift(__dirname + '/lib');
+
+var http = require('http'),
+  _ = require('underscore-min')['_'];
 
 
 http.createServer(function(request, response) {
