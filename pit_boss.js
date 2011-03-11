@@ -6,21 +6,36 @@ var http = require('http'),
   _ = require('underscore-min')['_'];
 
 
-http.createServer(function(request, response) {
-  var title = '<title>Serving Craps since 2011</title>';
-  var body;
-  if (request.url === '/tables') {
-    body = "<h1>Tables</h1>";
+var html = function(url) {
+  return '<html>' + head() + body(url) + '</html>';
+};
+
+var head = function() {
+  return '<head>' + title() + '</head>';
+};
+
+var title = function() {
+  return '<title>Serving Craps since 2011</title>';
+};
+
+var body = function(url) {
+  var results = '<body>';
+  if (url === '/tables') {
+    results += "<h1>Tables</h1>";
   } else {
-    body = "<h1>Possible Actions</h1>";
-    body += "<ul><li><a href='/tables'>List Tables</a></li></ul>";
+    results += "<h1>Possible Actions</h1>";
+    results += "<ul><li><a href='/tables'>List Tables</a></li></ul>";
   };
-  var html = '<html><head>' + title + '</head><body>' + body + '</body>';
+  return results + '</body>';
+};
+
+http.createServer(function(request, response) {
+  var content = html(request.url);
   response.writeHead(200, {
     'Content-Type': 'text/html',
-    'Content-Length': html.length
+    'Content-Length': content.length
   });
-  response.end(html);
+  response.end(content);
 }).listen(8124, '127.0.0.1', function() {
   console.log('PitBoss started on 127.0.0.1:8124 with pid ' + process.pid);
 });
