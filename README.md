@@ -27,10 +27,6 @@ libraries on the client side:
 * `jquery 1.5.1` for general manipulation
 * `socket.io 0.6.16` for pit boss communication
 
-
-* `
-
-
-
+[Is a very good programmer](https://github.com/derekcroft)
 
  
