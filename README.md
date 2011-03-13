@@ -13,13 +13,22 @@ An experiment in NodeJS, the Canvas and Craps tables.
 **TableTalk**: The chat server.
 
 
-building against: `node v0.3.8-pre` 
+building against: `node v0.5.0-pre` 
 
 libraries via `npm` using:
 
 * `underscore 1.1.4`
-* `socket.io 0.6.8`
+* `socket.io 0.6.16`
 * `vows 0.5.2`
+
+libraries on the client side:
+
+* `underscore 1.1.5` for iterating table data
+* `jquery 1.5.1` for general manipulation
+* `socket.io 0.6.16` for pit boss communication
+
+
+* `
 
 
 

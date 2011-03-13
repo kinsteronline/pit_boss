@@ -1,6 +1,6 @@
 /* The Pit Boss */
 
-require.paths.unshift(__dirname + '/lib');
+require.paths.unshift(__dirname + '/static/js');
 
 var http = require('http'),
   _ = require('underscore-min')['_'];
