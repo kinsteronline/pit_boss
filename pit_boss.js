@@ -4,10 +4,11 @@ require.paths.unshift(__dirname + '/static/js');
 
 var http = require('http'),
   _ = require('./lib/underscore-min')['_'],
-  html = require('./html.js');
+  html = require('./html.js'),
+  url = require('url');
 
 http.createServer(function(request, response) {
-  var content = html.html(request.url);
+  var content = html.html(url.parse(request.url));
   response.writeHead(200, {
     'Content-Type': 'text/html',
     'Content-Length': content.length

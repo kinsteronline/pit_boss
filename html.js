@@ -19,7 +19,7 @@ var body = function(url) {
 
 
 var body_content_method = function(url) {
-  return url === '/tables' ? tables_body : index_body;
+  return url.pathname === '/tables' ? tables_body : index_body;
 };
 
 
