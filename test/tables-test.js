@@ -1,7 +1,7 @@
 var vows = require('vows'),
     assert = require('assert');
 
-var tables = require('./tables');
+var tables = require('../tables');
 
 var CrapsTable = tables.CrapsTable;
 
@@ -17,5 +17,5 @@ vows.describe('Craps Tables').addBatch({
       topic: [new(CrapsTable), new(CrapsTable)]
     }
   }
-}).run();
+}).export(module);
 
