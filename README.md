@@ -8,6 +8,8 @@ An experiment in NodeJS, the Canvas and Craps tables.
 
 **House**: Runs the table games.
 
+**Tables**: Represents the actual individual craps table, of which a "house" may have many.
+
 **Hotel**: Keeps the players and their statistics.
 
 **TableTalk**: The chat server.
