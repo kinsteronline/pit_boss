@@ -10,6 +10,11 @@ vows.describe('The Hotel').addBatch({
     topic: new(Hotel),
     'has no players checked in': function(topic) {
       assert.isEmpty(topic.currentPlayers);
+    },
+    'allows a player to check in': {
+      topic: function (hotel) {
+        hotel.checkIn();
+      }
     }
   }
 }).export(module);
