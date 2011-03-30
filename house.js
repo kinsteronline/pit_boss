@@ -1,4 +1,7 @@
 exports.House = function() {};
 exports.House.prototype = {
-  currentPlayers: []
+  currentPlayers: [],
+  enter: function() {
+    this.currentPlayers.push("A Person");
+  }
 };

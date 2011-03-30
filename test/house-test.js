@@ -8,13 +8,12 @@ var House = house.House;
 vows.describe('The House').addBatch({
   'when first created': {
     topic: new(House),
-    'has no players': function(topic) {
-      assert.isEmpty(topic.currentPlayers);
+    'has no players': function(house) {
+      assert.isEmpty(house.currentPlayers);
     },
-    'allows a player to check in': {
-      topic: function (house) {
-        house.checkIn();
-      }
+    'allows a player to enter': function(house) {
+      house.enter(); 
+      assert.length(house.currentPlayers, 1);
     }
   }
 }).export(module);
