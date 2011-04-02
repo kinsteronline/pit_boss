@@ -30,6 +30,6 @@ libraries on the client side:
 * `socket.io 0.6.16` for pit boss communication
 
 [Is a very good programmer](https://github.com/derekcroft)
+that
 [Loves his mama](https://github.com/kinsteronline)
 
- 
