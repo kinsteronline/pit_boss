@@ -19,15 +19,18 @@ building against: `node v0.5.0-pre`
 
 libraries via `npm` using:
 
-* `underscore 1.1.4`
-* `socket.io 0.6.16`
-* `vows 0.5.2`
+* `socket.io 0.6.17`
+* `vows 0.5.8`
 
 libraries on the client side:
 
 * `underscore 1.1.5` for iterating table data
-* `jquery 1.5.1` for general manipulation
-* `socket.io 0.6.16` for pit boss communication
+* `jquery 1.5.2` for general manipulation
+
+A big thank you to the [artist](http://www.colourlovers.com/pattern/34018/60s_Wallpaper) who created the "Old Vegas" style background. Please let us know if there is any problem with us using the image.
+
+ 
+
 
 [Is a very good programmer](https://github.com/derekcroft)
 that
