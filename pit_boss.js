@@ -4,6 +4,7 @@ require.paths.unshift(__dirname + '/static/js');
 
 var http = require('http'),
     url  = require('url'),
+    path = require('path'),
     fs   = require('fs')
     _    = require('underscore-1.1.5.min')['_']; 
 
@@ -29,23 +30,23 @@ http.createServer(function(request, response) {
     response.end(content);
   }
 
-  var path = url.parse(request.url).pathname,
+  var requestPath = url.parse(request.url).pathname,
       content = "";
 
-  console.log("REQ'D: " + path);
+  console.log("REQ'D: " + requestPath);
 
-  if(path == '/') {
-    fs.readFile(__dirname + '/static/table.html', function(err, data) {
+  if(requestPath == '/') {
+    fs.readFile(path.join(__dirname,'static','table.html'), function(err, data) {
       writeOutHtml(data);
     });
 
   } else {
     var re = /.+\.(html|png|css|js)$/i;
-    var requestedFile = re.exec(path);
+    var requestedFile = re.exec(requestPath);
  
     if(requestedFile) {
       var contentType = requestedFile[1];
-      requestedFile = __dirname + '/static' + requestedFile.input;
+      requestedFile = path.join(__dirname,'static',requestedFile.input);
 
       fs.stat(requestedFile, function(err, stats) {  
         if(err) {
