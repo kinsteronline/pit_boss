@@ -1,12 +1,10 @@
 /* The Pit Boss */
 
-require.paths.unshift(__dirname + '/static/js');
-
 var http = require('http'),
     url  = require('url'),
     path = require('path'),
     fs   = require('fs')
-    _    = require('underscore-1.1.5.min')['_']; 
+    _    = require('./static/js/underscore-1.1.5.min')['_']; 
 
 var html = require('./html');
 
