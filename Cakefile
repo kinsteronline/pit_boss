@@ -5,7 +5,7 @@ task 'clean', 'Delete all generated js', ->
 
 
 task 'build:javascripts', 'Build the javascripts', ->
-  lib = spawn 'coffee', ['-o', './lib/', '-c', './src/house.coffee']
+  lib = spawn 'coffee', ['-o', './lib/', '-c', './src/house.coffee', './src/table.coffee']
   lib.stdout.on 'data', (data) ->
     process.stdout.write "#{data}"
   lib.stderr.on 'data', (data) ->
@@ -13,7 +13,7 @@ task 'build:javascripts', 'Build the javascripts', ->
 
 
 task 'build:vows', 'Build the vows', ->
-  vows = spawn 'coffee', ['-o', './test/', '-c', './test/house-test.coffee']
+  vows = spawn 'coffee', ['-o', './test/', '-c', './test/house-test.coffee', './test/table-test.coffee' ]
   vows.stdout.on 'data', (data) ->
     process.stdout.write "#{data}"
   vows.stderr.on 'data', (data) ->
@@ -27,7 +27,7 @@ task 'build', 'Build everything', ->
 
 task 'test', 'Run the tests', ->
   invoke 'build'
-  vows = spawn 'vows', ['./test/house-test.js']
+  vows = spawn 'vows', ['./test/house-test.js', './test/table-test.js']
   vows.stdout.on 'data', (data) ->
     process.stdout.write "#{data}"
   vows.stderr.on 'data', (data) ->
