@@ -1,20 +1,19 @@
-var vows = require('vows');
-var assert = require('assert');
-
-var house = require('../house');
-
-var House = house.House;
-
-vows.describe('The House').addBatch({
-  'when first created': {
-    topic: new(House),
-    'has no players': function(house) {
-      assert.isEmpty(house.currentPlayers);
-    },
-    'allows a player to enter': function(house) {
-      house.enter(); 
-      assert.length(house.currentPlayers, 1);
+(function() {
+  var House, assert, vows;
+  vows = require('vows');
+  assert = require('assert');
+  House = require('../lib/house.js');
+  vows.describe('The House').addBatch({
+    "Establishing the House and it's edge": {
+      topic: function() {
+        return new House();
+      },
+      'has one table for play': function(house) {
+        return assert.length(house.tables, 1);
+      },
+      'can add more tables': function(house) {
+        return assert.isFunction(house.addTable);
+      }
     }
-  }
-}).export(module);
-
+  })["export"](module);
+}).call(this);
