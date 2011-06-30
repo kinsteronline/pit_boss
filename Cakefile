@@ -1,19 +1,17 @@
+fs           = require 'fs'
 {spawn,exec} = require 'child_process'
 
 task 'clean', 'Delete all generated js', ->
-  console.log 'destruction!'
-
+  fs.readdir './lib', (err, files) ->
+    for file in files
+      console.log file
 
 task 'build:javascripts', 'Build the javascripts', ->
-  lib = spawn 'coffee', ['-o', './lib/', '-c', './src/house.coffee', './src/table.coffee']
-  lib.stdout.on 'data', (data) ->
-    process.stdout.write "#{data}"
-  lib.stderr.on 'data', (data) ->
-    console.log "OHNOES! #{data}"
-
+  exec 'coffee -o ./lib/ -c ./src/*.coffee', (error, stdout, stderr) ->
+    process.stdout.write "#{stdout}"
 
 task 'build:vows', 'Build the vows', ->
-  vows = spawn 'coffee', ['-o', './test/', '-c', './test/house-test.coffee', './test/table-test.coffee' ]
+  vows = spawn 'coffee', ['-o', './test/', '-c', './test/*-test.coffee']
   vows.stdout.on 'data', (data) ->
     process.stdout.write "#{data}"
   vows.stderr.on 'data', (data) ->
@@ -27,7 +25,7 @@ task 'build', 'Build everything', ->
 
 task 'test', 'Run the tests', ->
   invoke 'build'
-  vows = spawn 'vows', ['./test/house-test.js', './test/table-test.js']
+  vows = spawn 'vows', ['./test/*-test.js']
   vows.stdout.on 'data', (data) ->
     process.stdout.write "#{data}"
   vows.stderr.on 'data', (data) ->
