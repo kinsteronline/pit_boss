@@ -3,16 +3,12 @@ fs           = require 'fs'
 
 task 'clean', 'Delete all generated js', ->
   fs.readdir './lib', (err, files) ->
-    doomedFiles = files.map (file) -> "./lib/#{file}"
-    console.dir doomedFiles
-  fs.readdir './test', (err, files) ->
-    doomedFiles = files.map (file) -> "./test/#{file}"
-    console.dir doomedFiles
+    doomed_files = files.map (file) -> "./lib/#{file}"
 
 task 'build:javascripts', 'Build the javascripts', ->
   fs.readdir './src', (err, files) ->
-    coffeeFiles = files.filter (file) -> ///.+\.coffee$///.test(file)
-    build = spawn 'coffee', ['-o', './lib', '-c'].concat coffeeFiles.map (file) -> "./src/#{file}"
+    coffee_files = files.filter (file) -> ///.+\.coffee$///.test(file)
+    build = spawn 'coffee', ['-o', './lib', '-c'].concat coffee_files.map (file) -> "./src/#{file}"
     build.stdout.on 'data', (data) ->
       process.stdout.write "#{data}"
     build.stderr.on 'data', (data) ->
@@ -21,8 +17,8 @@ task 'build:javascripts', 'Build the javascripts', ->
 
 task 'build:vows', 'Build the vows', ->
   fs.readdir './vows', (err, files) ->
-    vowFiles = files.filter (file) -> ///.*\.coffee$///.test(file)
-    vows = spawn 'coffee', ['-o', './test/', '-c'].concat vowFiles.map (file) -> "./vows/#{file}"
+    vows_files = files.filter (file) -> ///.*\.coffee$///.test(file)
+    vows = spawn 'coffee', ['-o', './test/', '-c'].concat vows_files.map (file) -> "./vows/#{file}"
     vows.stdout.on 'data', (data) ->
       process.stdout.write "#{data}"
     vows.stderr.on 'data', (data) ->
@@ -37,8 +33,8 @@ task 'build', 'Build everything', ->
 task 'test', 'Build everything and run the tests', ->
   invoke 'build'
   fs.readdir './test', (err, files) ->
-    testFiles = files.filter (file) -> ///.+-test\.js$///.test(file)
-    vows = spawn 'vows', testFiles.map (file) -> "./test/#{file}"
+    test_files = files.filter (file) -> ///.+-test\.js$///.test(file)
+    vows =  spawn 'vows', test_files.map (file) -> "./test/#{file}"
     vows.stdout.on 'data', (data) ->
       process.stdout.write "#{data}"
     vows.stderr.on 'data', (data) ->
