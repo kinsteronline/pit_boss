@@ -1,13 +1,18 @@
 fs           = require 'fs'
 {spawn,exec} = require 'child_process'
 
+globDir = (dir, namePattern) ->
+  console.log dir
+
 task 'clean', 'Delete all generated js', ->
   fs.readdir './lib', (err, files) ->
     doomedFiles = files.map (file) -> "./lib/#{file}"
-    console.dir doomedFiles
+    fs.unlink file for file in doomedFiles
+
   fs.readdir './test', (err, files) ->
     doomedFiles = files.map (file) -> "./test/#{file}"
-    console.dir doomedFiles
+    fs.unlink file for file in doomedFiles
+
 
 task 'build:javascripts', 'Build the javascripts', ->
   fs.readdir './src', (err, files) ->
