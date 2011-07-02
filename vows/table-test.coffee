@@ -19,6 +19,8 @@ vows.describe('A Craps Table').addBatch({
       assert.isEmpty table.bets
     'is empty': (table) ->
       assert.isTrue table.empty?
+    'point is not established': (table) ->
+      assert.isFalse table.pointEstablished
   }
   'when a new player joins an empty table': {
     topic: () ->

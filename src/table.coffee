@@ -11,6 +11,7 @@ module.exports = class Table
     @players = new Array(maxPlayers)
     @shooter = null
     @bets = []
+    @pointEstablished = false
 
   addPlayer: (player) ->
     if not full? and player not in @players
@@ -29,4 +30,10 @@ module.exports = class Table
 
   newShooter: (player) ->
     @shooter = player if not @shooter?
+
+  wagers: {
+    'passLine': (dice) ->
+      console.log dice
+      /* is the point established? */
+  }
 
