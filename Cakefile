@@ -1,18 +1,17 @@
 fs           = require 'fs'
 {spawn,exec} = require 'child_process'
 
-globDir = (dir, namePattern) ->
-  console.log dir
 
 task 'clean', 'Delete all generated js', ->
   fs.readdir './lib', (err, files) ->
-    doomedFiles = files.map (file) -> "./lib/#{file}"
-    fs.unlink file for file in doomedFiles
+    for file in files
+      do (file) ->
+        fs.unlink "./lib/#{file}"
 
   fs.readdir './test', (err, files) ->
-    doomedFiles = files.map (file) -> "./test/#{file}"
-    fs.unlink file for file in doomedFiles
-
+    for file in files
+      do (file) ->
+        fs.unlink "./test/#{file}"
 
 task 'build:javascripts', 'Build the javascripts', ->
   fs.readdir './src', (err, files) ->
@@ -48,6 +47,5 @@ task 'test', 'Build everything and run the tests', ->
       process.stdout.write "#{data}"
     vows.stderr.on 'data', (data) ->
       process.stderr.write "! #{data}"
-
 
 
