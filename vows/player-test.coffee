@@ -8,6 +8,8 @@ vows.describe('Player').addBatch({
     topic: () -> new Player("A Hundredaire")
     'has a name': (player) ->
       assert.equal player.name, "A Hundredaire"
+    'has no chips': (player) ->
+      assert.equal player.chipCount, 0
   }
 }).export(module)
 

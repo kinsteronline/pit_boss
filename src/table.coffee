@@ -9,11 +9,24 @@ module.exports = class Table
     [ @minBet, @maxBet, @odds, @maxPlayers ] = [ minBet, maxBet, odds, maxPlayers ]
     @id = uuid()
     @players = new Array(maxPlayers)
+    @shooter = null
+    @bets = []
 
   addPlayer: (player) ->
-    if not full? and @players.indexOf player isnt -1
-      @players.push player
+    if not full? and player not in @players
+      @players[@players.indexOf(undefined)] = player
+      @newShooter player if not @shooter?
+
+  removePlayer: (player) ->
+    if player in @players
+      @players[@players.indexOf(player)] = undefined
 
   full: ->
     @players.length is @maxPlayers
+
+  empty: ->
+    @players.some (player) -> player isnt undefined
+
+  newShooter: (player) ->
+    @shooter = player if not @shooter?
 
