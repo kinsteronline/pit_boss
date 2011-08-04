@@ -1,6 +1,23 @@
-#
-# A Craps Table
-#
+###
+Table
+=====
+
+A Craps Table
+
+Events Emitted
+--------------
+* player-joined, (Player)
+* player-left, (Player)
+* point-established, (number)
+* no-more-bets
+* crapped-out
+* natural-seven
+
+Events Listened
+---------------
+* house-shutdown
+
+###
 
 {EventEmitter} = require 'events'
 
@@ -13,6 +30,8 @@ module.exports = class Table extends EventEmitter
 
   addPlayer: (player) ->
     @players.push player
+    @emit 'player-joined'
 
   removePlayer: (player) ->
-    # remove
+    @emit 'player-left'
+

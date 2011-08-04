@@ -7,11 +7,11 @@ task 'clean', 'Delete all generated js', ->
     for file in files
       do (file) ->
         fs.unlink "./lib/#{file}"
-
   fs.readdir './test', (err, files) ->
     for file in files
       do (file) ->
         fs.unlink "./test/#{file}"
+
 
 task 'build:js', 'Build the javascripts', ->
   fs.readdir './src', (err, files) ->
@@ -48,4 +48,7 @@ task 'test', 'Build everything and run the tests', ->
     vows.stderr.on 'data', (data) ->
       process.stderr.write "! #{data}"
 
+
+task 'docco', 'Build the doccos', ->
+  docco = spawn 'docco', [ './src/*.coffee' ]
 

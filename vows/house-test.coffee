@@ -5,7 +5,7 @@ House  = require '../lib/house.js'
 
 vows.describe('The House').addBatch({
   "Establishing the default House, it's one table and the edge": {
-    topic: () -> new House()
+    topic: -> new House()
     'has one table for play': (house) ->
       assert.equal house.tableCount(), 1
     'is full with one table': (house) ->
