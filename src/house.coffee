@@ -1,15 +1,26 @@
 #
-#  The House runs the tables and maintains the edge.
+# The House runs the tables and maintains the edge.
 #
-
-Player = require '../lib/player'
+#Player = require '../lib/player'
 Table  = require '../lib/table'
 
-module.exports = class House
-  constructor: (tables = [], options...) ->
-    @tables = tables
-    @tables.push new Table() if tables.length is 0
+global.uuid = require 'node-uuid'
+{EventEmitter} = require 'events'
 
-  addTable: (table) ->
-    @tables.push table
+module.exports = class House extends EventEmitter
+  constructor: (maxTableCount = 1) ->
+    @tables = new Array(maxTableCount)
+    @addTable
+    for idx in [1...maxTableCount]
+      @tables[idx] = undefined
 
+  tableCount: ->
+    @tables.length
+
+  full: ->
+    not @tables.some (table) -> table is undefined
+
+  addTable: ->
+    return null if full?
+    @tables.push new Table(@) unless full?
+    @emit 'table.new'

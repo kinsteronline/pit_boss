@@ -13,7 +13,7 @@ task 'clean', 'Delete all generated js', ->
       do (file) ->
         fs.unlink "./test/#{file}"
 
-task 'build:javascripts', 'Build the javascripts', ->
+task 'build:js', 'Build the javascripts', ->
   fs.readdir './src', (err, files) ->
     coffeeFiles = files.filter (file) -> ///.+\.coffee$///.test(file)
     build = spawn 'coffee', ['-o', './lib', '-c'].concat coffeeFiles.map (file) -> "./src/#{file}"
@@ -34,7 +34,7 @@ task 'build:vows', 'Build the vows', ->
 
 
 task 'build', 'Build everything', ->
-  invoke 'build:javascripts'
+  invoke 'build:js'
   invoke 'build:vows'
 
 
@@ -42,7 +42,7 @@ task 'test', 'Build everything and run the tests', ->
   invoke 'build'
   fs.readdir './test', (err, files) ->
     testFiles = files.filter (file) -> ///.+-test\.js$///.test(file)
-    vows = spawn 'vows', testFiles.map (file) -> "./test/#{file}"
+    vows = spawn 'vows', [ '--spec'].concat testFiles.map (file) -> "./test/#{file}"
     vows.stdout.on 'data', (data) ->
       process.stdout.write "#{data}"
     vows.stderr.on 'data', (data) ->
