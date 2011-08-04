@@ -4,3 +4,5 @@
 .svn
 test/*.js
 lib/*.js
+vows/*.js
+
