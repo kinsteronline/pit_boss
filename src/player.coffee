@@ -1,5 +1,11 @@
 ###
 
+Events Emitted
+--------------
+* rolling
+* rolled
+* shooter
+
 ###
 
 {EventEmitter} = require 'events'
