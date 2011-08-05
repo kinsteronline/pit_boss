@@ -2,7 +2,7 @@
 # The House runs the tables and maintains the edge.
 #
 #Player = require '../lib/player'
-Table  = require '../lib/table'
+#Table  = require '../lib/table'
 
 global.uuid = require 'node-uuid'
 {EventEmitter} = require 'events'

@@ -52,3 +52,15 @@ task 'test', 'Build everything and run the tests', ->
 task 'docco', 'Build the doccos', ->
   docco = spawn 'docco', [ './src/*.coffee' ]
 
+
+writeMessages = (childProcess) -> 
+  childProcess.stdout.on 'data', (data) ->
+    process.stdout.write "#{data}"
+  childProcess.stderr.on 'data', (data) ->
+    process.stderr.write "! #{data}"
+
+
+task 'autotest', 'Launch the coffee and vows watchers', ->
+  writeMessages spawn 'vows', ['-w']
+  writeMessages spawn 'coffee', ['-o', './lib/', '-w', './src/']
+  writeMessages spawn 'coffee', ['-o', './test/', '-w', './vows/']

@@ -3,7 +3,7 @@ assert = require 'assert'
 
 House  = require '../lib/house.js'
 
-vows.describe('The House').addBatch({
+vows.describe('The House').addBatch(
   "Establishing the default House, it's one table and the edge": {
     topic: -> new House()
     'has one table for play': (house) ->
@@ -18,5 +18,5 @@ vows.describe('The House').addBatch({
     'is not full': (house) ->
       assert.isFalse house.full()
   }
-}).export(module)
+).export(module)
 
