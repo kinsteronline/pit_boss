@@ -14,7 +14,6 @@ Events Emitted
 * natural
 * come-out
 * seven-out
-* no-more-bets
 
 Events Listened
 ---------------
