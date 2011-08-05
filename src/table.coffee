@@ -1,17 +1,20 @@
 ###
 Table
 =====
-
-A Craps Table
+Where the fun happens, a Craps Table
 
 Events Emitted
 --------------
 * player-joined, (Player)
 * player-left, (Player)
-* point-established, (number)
+* point, (number)
+* new-shooter, (Player)
 * no-more-bets
-* crapped-out
-* natural-seven
+* dice-out
+* natural
+* come-out
+* seven-out
+* no-more-bets
 
 Events Listened
 ---------------
