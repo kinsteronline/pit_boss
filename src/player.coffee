@@ -1,4 +1,13 @@
 ###
+Player
+======
+High Rollers and Hundredaires _(new working title?)_
+
+Events Emitted
+--------------
+* rolling
+* rolled
+* shooter
 
 ###
 
