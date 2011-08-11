@@ -18,5 +18,14 @@ vows.describe('The House').addBatch(
     'is not full': (house) ->
       assert.isFalse house.full()
   }
+  "Adding a new Table to the House": {
+    topic: ->
+      house = new House(4)
+      house.addTable()
+    'has 5 tables for play': (table) ->
+      assert.isNotNull table
+      assert.isInstanceOf table, Table
+      assert.equal table.house.tableCount(), 5
+  }
 ).export(module)
 
