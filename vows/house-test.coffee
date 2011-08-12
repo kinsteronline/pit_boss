@@ -5,28 +5,31 @@ House  = require '../lib/house.js'
 Table  = require '../lib/table.js'
 
 vows.describe('The House').addBatch(
-  "Establishing the default House, it's one table and the edge": {
+  "When first created": {
     topic: -> new House()
-    'has one table for play': (house) ->
-      assert.equal house.tableCount(), 1
-    'is full with one table': (house) ->
-      assert.isTrue house.full()
+    "has one table": (house) ->
+      assert.equal 1, house.tables.length
+    "and a table is created": {
+      topic: (house) ->
+        house.tables.push new Table()
+        house
+      "has two tables": (house) ->
+        assert.equal 2, house.tables.length
+    }
   }
-  "Establishing a House with a capacity of 16 tables": {
-    topic: -> new House(16)
-    'has 16 tables for play': (house) ->
-      assert.equal house.tableCount(), 16
-    'is not full': (house) ->
-      assert.isFalse house.full()
-  }
-  "Adding a new Table to the House": {
+  "When it has multiple tables": {
     topic: ->
-      house = new House(4)
-      house.addTable()
-    'has 5 tables for play': (table) ->
-      assert.isNotNull table
-      assert.instanceOf table, Table
-      assert.equal table.house.tableCount(), 5
+      house = new House()
+      for x in [1..3]
+        house.tables.push new Table()
+      house
+    "and a table is removed": {
+      topic: (house) ->
+        house.tables.pop
+        house
+      "it has one fewer table": (house) ->
+        assert.equal 3, house.tables.length
+    }
   }
 ).export(module)
 
