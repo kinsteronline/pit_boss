@@ -6,28 +6,27 @@ Table  = require '../lib/table.js'
 
 vows.describe('The House').addBatch(
   "When first created":
-    topic: -> new House()
-    "has one table": (house) ->
-      assert.equal 1, house.tables.length
-    "and a table is created":
+    topic: -> new House
+    "it has one table": (house) ->
+      assert.length house.tables, 1
+    "and another table is created":
       topic: (house) ->
-        house.tables.push new Table()
+        house.createTable(this.callback)
         house
-      "has two tables": (house) ->
-        assert.equal 2, house.tables.length
+      "it has two tables": (house) ->
+        assert.length house.tables, 2
         
-  "When it has multiple tables":
+  "When a house has multiple tables":
     topic: ->
-      house = new House()
+      house = new House
+      success = (tables) ->
+        this.emit('success') if tables.length == 4
       for x in [1..3]
-        house.tables.push new Table()
+        house.createTable success
       house
-    "and a table is removed":
-      topic: (house) ->
-        house.tables.splice house.tables.length - 1, 1
-        house
-      "it has one fewer table": (house) ->
-        assert.equal 3, house.tables.length
+    "it creates them asychronously with no problem": (house) ->
+      assert.length house.tables, 4
+
 
 ).export(module)
 
