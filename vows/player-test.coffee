@@ -19,8 +19,14 @@ vows.describe('Player').addBatch({
       player = new Player
       house.registerPlayer player, this.callback
       player
-    'he is registered with the house': (player) ->
-      assert.isTrue house.isPlayerRegistered player
+    'and the house has no tables yet':
+      topic: (player) ->
+        house.tables = []
+        house
+      'and he gets a list of tables': 
+        topic: (house, player) -> house.listTables player, this.callback
+        'it is an empty list': (tables) ->
+          assert.isEmpty tables 
      
 }).export(module)
 
