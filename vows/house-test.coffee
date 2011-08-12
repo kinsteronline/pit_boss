@@ -25,7 +25,7 @@ vows.describe('The House').addBatch(
       house
     "and a table is removed": {
       topic: (house) ->
-        house.tables.pop
+        house.tables.splice house.tables.length - 1, 1
         house
       "it has one fewer table": (house) ->
         assert.equal 3, house.tables.length
