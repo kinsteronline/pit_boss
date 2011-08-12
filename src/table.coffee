@@ -25,5 +25,6 @@ Events Listened
 
 module.exports = class Table extends EventEmitter
   constructor: (@house) ->
+    [ @point, @bets, @shooter, @players ] = [ null, [], null, [] ]
 
 
