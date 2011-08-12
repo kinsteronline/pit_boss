@@ -20,3 +20,5 @@ module.exports = class House extends EventEmitter
   registerPlayer: ->
     @registeredPlayers.push new Player
     this.emit('success', @registeredPlayers)
+
+  isPlayerRegistered: -> false
