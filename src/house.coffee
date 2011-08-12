@@ -1,7 +1,7 @@
 #
 # The House runs the tables and maintains the edge.
 #
-#Player = require '../lib/player'
+Player = require '../lib/player'
 
 global.uuid = require 'node-uuid'
 {EventEmitter} = require 'events'
@@ -17,3 +17,6 @@ module.exports = class House extends EventEmitter
     @tables.push new Table
     this.emit('success', @tables)
 
+  registerPlayer: ->
+    @registeredPlayers.push new Player
+    this.emit('success', @registeredPlayers)

@@ -16,6 +16,12 @@ vows.describe('The House').addBatch(
         house
       "it has two tables": (house) ->
         assert.length house.tables, 2
+    "and a player registers":
+      topic: (house) ->
+        house.registerPlayer(this.callback)
+        house
+      "it has one registered player": (house) ->
+        assert.length house.registeredPlayers, 1
 
   "When a house has multiple tables":
     topic: ->
