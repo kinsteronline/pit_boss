@@ -24,5 +24,6 @@ Events Listened
 {EventEmitter} = require 'events'
 
 module.exports = class Table extends EventEmitter
-  constructor: ->
+  constructor: (@house) ->
+
 
