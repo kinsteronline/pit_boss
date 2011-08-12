@@ -1,7 +1,10 @@
 vows   = require 'vows'
 assert = require 'assert'
 
-House  = require '../lib/house.js'
+Player = require '../lib/player.js'
+House = require '../lib/house.js'
+
+player = new Player
 
 vows.describe('The House').addBatch(
   "When first created":
@@ -18,10 +21,13 @@ vows.describe('The House').addBatch(
         assert.length house.tables, 2
     "and a player registers":
       topic: (house) ->
-        house.registerPlayer(this.callback)
+        house.registerPlayer player, this.callback
         house
       "it has one registered player": (house) ->
         assert.length house.registeredPlayers, 1
+      "and that registered player is him": (house) ->
+        assert.include house.registeredPlayers, player
+        assert.isTrue house.isPlayerRegistered player
 
   "When a house has multiple tables":
     topic: ->

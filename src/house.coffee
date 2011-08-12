@@ -17,8 +17,8 @@ module.exports = class House extends EventEmitter
     @tables.push new Table
     this.emit('success', @tables)
 
-  registerPlayer: ->
-    @registeredPlayers.push new Player
+  registerPlayer: (player) ->
+    @registeredPlayers.push player
     this.emit('success', @registeredPlayers)
 
-  isPlayerRegistered: -> false
+  isPlayerRegistered: (player) -> player in @registeredPlayers
