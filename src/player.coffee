@@ -16,4 +16,4 @@ Events Emitted
 module.exports = class Player extends EventEmitter
   constructor: (@name) ->
     @uuid = uuid()
-
+    @chips = 100.00
