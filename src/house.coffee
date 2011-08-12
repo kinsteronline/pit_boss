@@ -11,6 +11,7 @@ Table  = require '../lib/table'
 module.exports = class House extends EventEmitter
   constructor: ->
     @tables = [ this.createTable ]
+    @registeredPlayers = []
 
   createTable: ->
     @tables.push new Table

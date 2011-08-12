@@ -8,13 +8,15 @@ vows.describe('The House').addBatch(
     topic: -> new House
     "it has one table": (house) ->
       assert.length house.tables, 1
+    "it has no registered players": (house) ->
+      assert.length house.registeredPlayers, 0
     "and another table is created":
       topic: (house) ->
         house.createTable(this.callback)
         house
       "it has two tables": (house) ->
         assert.length house.tables, 2
-        
+
   "When a house has multiple tables":
     topic: ->
       house = new House
