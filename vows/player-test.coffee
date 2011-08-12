@@ -19,14 +19,23 @@ vows.describe('Player').addBatch({
       player = new Player
       house.registerPlayer player, this.callback
       player
-    'and the house has no tables yet':
+    'and the house has no tables':
       topic: (player) ->
         house.tables = []
         house
       'and he gets a list of tables': 
-        topic: (house, player) -> house.listTables player, this.callback
+        topic: (house, player) -> 
+          house.listTables player, this.callback
+          house.tables
         'it is an empty list': (tables) ->
           assert.isEmpty tables 
+        'but then a table is created':
+          topic: (tables, house, player) ->
+            house.createTable this.callback
+            house
+          'then the list contains the new table': (createdTable) ->
+            assert.include house.listTables, createdTable
+
      
 }).export(module)
 
