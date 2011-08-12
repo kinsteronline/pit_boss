@@ -2,7 +2,6 @@ vows   = require 'vows'
 assert = require 'assert'
 
 House  = require '../lib/house.js'
-Table  = require '../lib/table.js'
 
 vows.describe('The House').addBatch(
   "When first created":
@@ -26,7 +25,5 @@ vows.describe('The House').addBatch(
       house
     "it creates them asychronously with no problem": (house) ->
       assert.length house.tables, 4
-
-
 ).export(module)
 
