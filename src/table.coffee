@@ -27,4 +27,8 @@ module.exports = class Table extends EventEmitter
   constructor: (@house) ->
     [ @point, @bets, @shooter, @players ] = [ null, [], null, [] ]
 
+  join: (player) ->
+    @shooter = player if @players.length is 0
+    @players.push player
+    @emit 'player:joined', @table, player
 

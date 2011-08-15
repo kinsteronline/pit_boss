@@ -8,6 +8,8 @@ Player = require '../lib/player.js'
 vows.describe('Craps Table').addBatch(
   'When first created':
     topic: -> new Table
+    'a player can join': (table) ->
+      assert.isFunction table.join
     'has no players': (table) ->
       assert.isEmpty table.players
     'the point is not established': (table) ->
@@ -18,7 +20,7 @@ vows.describe('Craps Table').addBatch(
       assert.isNull table.shooter
     'and a player joins': 
       topic: (table) ->
-        table.players.push new Player
+        table.join new Player
         table
       'it has one player': (table) ->
         assert.length table.players, 1
