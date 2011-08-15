@@ -30,5 +30,7 @@ module.exports = class Table extends EventEmitter
   join: (player) ->
     @shooter = player if @players.length is 0
     @players.push player
+    @bets.push 'PASSLINEBET'
+    @emit 'player:bet', 'PASSLINEBET'
     @emit 'player:joined', @table, player
 
