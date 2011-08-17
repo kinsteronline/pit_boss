@@ -36,7 +36,6 @@ vows.describe('Player').addBatch({
           'then the list contains the new table': (createdTable) ->
             assert.include house.listTables, createdTable
 
-     
 }).export(module)
 
 
