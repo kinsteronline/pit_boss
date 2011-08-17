@@ -28,4 +28,18 @@ vows.describe('Craps Table').addBatch(
         assert.equal table.shooter, table.players[0]
       'a single bet should have been placed': (table) ->
         assert.length table.bets, 1
+  'With three players':
+    topic: ->
+      table = new Table
+      alan = table.join new Player('Alan')
+      stu = table.join new Player('Stu')
+      phil = table.join new Player('Phil')
+      [ table, alan, stu, phil ]
+    # This doesn't feel right at all...
+    'player can be found by index': ([ table, alan, stu, phil ]) ->
+      assert.equal alan, table.player 0
+    'player can be found by uuid': ([ table, alan, stu, phil ]) ->
+      assert.equal alan, table.player alan.uuid
+    'player can be found by player': ([ table, alan, stu, phil ]) ->
+      assert.equal alan, table.player alan
 ).export(module)

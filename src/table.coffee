@@ -33,4 +33,15 @@ module.exports = class Table extends EventEmitter
     @bets.push 'PASSLINEBET'
     @emit 'player:bet', 'PASSLINEBET'
     @emit 'player:joined', @table, player
+    player
+
+  # Is this even needed?
+  player: (arg) ->
+    return @players[arg] if typeof arg is 'number'
+    return arg if arg in @players
+
+    if typeof arg is 'string'
+      potentials = @players.filter (player) ->
+        player.uuid is arg
+      potentials[0]
 
