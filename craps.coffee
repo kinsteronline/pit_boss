@@ -9,6 +9,7 @@ app = Express()
 app.configure ->
   app.set 'port', process.env.PORT || 2312 # 2,3,12 natural craps
 
+app.use Express.static 'static'
 app.get '/', (req,res) ->
   res.send 'Pit Boss Craps'
 
