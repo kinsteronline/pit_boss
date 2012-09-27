@@ -10,6 +10,9 @@
 
 An experiment in NodeJS, CoffeeScript, the Canvas and a Craps Tables.
 
+  coffee craps.coffee
+  http://localhost:2312
+
 A big thank you to the artist who created the "Old Vegas" style
 background. Please let us know if there is any problem with us using
 the image.
