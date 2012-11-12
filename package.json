@@ -4,8 +4,9 @@
   "dependencies": {
     "coffee-script": "1.4.x",
     "express": "3.0.x",
-		"ws": "0.4.x"
-
+		"stitch": "0.3.x",
+		"ws": "0.4.x",
+		"tinycolor": "0.0.1"
   },
   "repository": {
     "type": "git",
