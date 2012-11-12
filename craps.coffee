@@ -3,18 +3,25 @@
 A start as fresh as the Imperial Palace
 
 ###
+
 TinyColor         = require 'tinycolor'
 Http              = require 'http'
 Express           = require 'express'
 Stitch            = require 'stitch'
 WebSocketServer   = require('ws').Server
 
+# Game things
+Player  = require './lib/player'
+Table   = require './lib/table'
 
+
+# Stitch together the client-side
 clientJs = Stitch.createPackage(
   paths: [__dirname + '/client' ]
 )
 
 
+# The game is served via traditional web
 gameServer = Express()
 gameServer.configure ->
   gameServer.set 'port', process.env.PORT || 2312 # 2,3,12 natural craps
@@ -31,7 +38,7 @@ webServer.listen gameServer.get('port'), ->
   console.log 'game'.grey
   console.log 'Game Server started on ' + gameServer.get('port')
 
-
+# The game is served via websocket
 socketServer = new WebSocketServer(server: webServer)
 socketServer.on 'connection', (ws) ->
   'Gambler connected'

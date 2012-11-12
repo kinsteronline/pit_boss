@@ -8,6 +8,10 @@
 		"ws": "0.4.x",
 		"tinycolor": "0.0.1"
   },
+	"devDependencies": {
+	  "mocha": "1.7.0",
+		"expect.js": "0.2.x"
+	},
   "repository": {
     "type": "git",
     "url": "git://github.com/kinsteronline/pit_boss.git"
