@@ -1,13 +1,18 @@
 class Table
+  OFF = 0
+
   constructor: (@uid, options) ->
     @maxPlayers = options?.maxPlayers || 16
     @gamblers = []
-    @shooter
+    @shooter = no
+    @wagers = []
+    @point = OFF
 
   join: (player) ->
-    @gamblers.push(player) unless player in @gamblers or @full()
-    @shooter = player if @gamblers.length is 1
-    this
+    return no if player in @gamblers or @full()
+    @gamblers.push(player)
+    @shooter = player if not @shooter
+    yes
 
   leave: (player) ->
     if player in @gamblers
@@ -16,5 +21,11 @@ class Table
 
   full: ->
     @gamblers.length >= @maxPlayers
+
+  bettingAllowed: ->
+    true
+
+  pointEstablished: ->
+    @point isnt OFF
 
 module.exports = Table
