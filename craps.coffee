@@ -30,7 +30,7 @@ gameServer.configure ->
 
 gameServer.get '/js/craps-game.js', clientJs.createServer()
 gameServer.get '/about', (req,res) ->
-  res.send 'Pit Boss Craps 0.3'
+  res.send 'Pit Boss Craps 0.4'
 
 
 webServer = Http.createServer(gameServer)
