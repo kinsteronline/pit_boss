@@ -1,15 +1,9 @@
 module.exports = CrapsGame =
   init: ->
-    gameHost = window.document.location.host.replace /:.*/, ''
-
-    ws = new WebSocket 'ws://' + gameHost + ':2312' 
-    console.dir ws
-
-    ws.addEventListener 'open', ->
-      console.log "OPENEED!"
-      ws.send 'xxx'
-      ws.send 'yyy'
-
-    ws.addEventListener 'message', (event) ->
-      console.dir event
+    { protocol, host } = window.document.location
+    socket = io.connect protocol + '//' + host
+    socket.on 'connect', ->
+      console.log 'We have a gambler'
+    socket.on 'welcome',  (data) ->
+      console.dir data
 

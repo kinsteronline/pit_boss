@@ -8,7 +8,7 @@ TinyColor         = require 'tinycolor'
 Http              = require 'http'
 Express           = require 'express'
 Stitch            = require 'stitch'
-WebSocketServer   = require('ws').Server
+WebSocketServer   = require('socket.io')
 
 # Game things
 Player  = require './lib/player'
@@ -39,14 +39,11 @@ webServer.listen gameServer.get('port'), ->
   console.log 'Game Server started on ' + gameServer.get('port')
 
 # The game is served via websocket
-socketServer = new WebSocketServer(server: webServer)
-socketServer.on 'connection', (ws) ->
-  'Gambler connected'
-  ws.send 'welcome to crap'
+socketServer = WebSocketServer.listen(webServer)
+socketServer.on 'connection', (socket) ->
+  console.log 'Gambler connected'
+  socket.emit 'welcome', msg: 'to a craps table' 
 
-  ws.on 'message', (data, flags) ->
-    console.dir data
-
-  ws.on 'close', ->
+  socket.on 'disconnect', ->
     console.log 'Gamber disonnected'
 
