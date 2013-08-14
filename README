@@ -8,14 +8,5 @@
             \/____o/
 
 
-An experiment in NodeJS, CoffeeScript, the Canvas and a Craps Tables.
-
-  coffee craps.coffee
-  http://localhost:2312
-
-A big thank you to the artist who created the "Old Vegas" style
-background. Please let us know if there is any problem with us using
-the image.
-
-  http://www.colourlovers.com/pattern/34018/60s_Wallpaper 
+Default port is 2312 (2, 3 or 12 Crappin' Out)
 
