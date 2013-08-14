@@ -1,0 +1,30 @@
+{
+  "name": "pit_boss",
+  "version": "0.0.5",
+  "description": "A crappy craps server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "config": {
+    "port": 2312
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kinsteronline/pit_boss.git"
+  },
+  "author": "kinsteronline",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/kinsteronline/pit_boss/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-coffee": "~0.7.0"
+  },
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "connect": "~2.8.5"
+  }
+}
