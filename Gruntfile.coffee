@@ -1,11 +1,13 @@
 module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
-    coffee:
-      compile:
-        files:
-          'server.js': 'src/server.coffee'
 
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
+    mochacli:
+      options:
+        reporter: 'spec'
+        bail: true
+      all: ['test/*.spec.js']
+
+  grunt.loadNpmTasks 'grunt-mocha-cli'
   
-  grunt.registerTask 'default', ['coffee']
+  grunt.registerTask 'default', ['mochacli']

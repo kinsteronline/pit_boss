@@ -1,9 +1,4 @@
 *~
 *.swp
 .DS_Store
-.svn
-test/*.js
-lib/*.js
-vows/*.js
-*.js
 

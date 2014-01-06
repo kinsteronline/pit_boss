@@ -21,10 +21,14 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-mocha-cli": "~1.4.0",
+    "chai": "~1.8.1"
   },
   "dependencies": {
     "socket.io": "~0.9.16",
-    "connect": "~2.8.5"
+    "connect": "~2.8.5",
+    "uuid": "~1.4.1",
+    "underscore": "~1.5.2"
   }
 }
