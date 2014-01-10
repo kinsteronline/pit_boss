@@ -28,6 +28,7 @@
   "dependencies": {
     "uuid": "~1.4.1",
     "underscore": "~1.5.2",
-    "express": "~3.4.7"
+    "express": "~3.4.7",
+    "ws": "~0.4.31"
   }
 }

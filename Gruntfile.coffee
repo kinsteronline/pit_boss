@@ -5,7 +5,6 @@ module.exports = (grunt) ->
     mochacli:
       options:
         reporter: 'spec'
-        ui: 'bdd'
         bail: true
         harmony: true
       all: ['test/*.spec.js']

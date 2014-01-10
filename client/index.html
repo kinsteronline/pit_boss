@@ -6,5 +6,12 @@
   </head>
   <body>
     <em>Pit Boss: Craps</em>
+    <script>
+      // gamewebsocket
+      var gws = new WebSocket('ws://' + window.location.host + '/');
+      gws.onopen = function() {
+        gws.send('i have money to lose');
+      };
+    </script>
   </body>
 </html>
