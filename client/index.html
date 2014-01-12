@@ -2,16 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>Pit Boss: Craps</title>
+    <script src="https://login.persona.org/include.js"></script>
   </head>
   <body>
-    <em>Pit Boss: Craps</em>
-    <script>
-      // gamewebsocket
-      var gws = new WebSocket('ws://' + window.location.host + '/');
-      gws.onopen = function() {
-        gws.send('i have money to lose');
-      };
-    </script>
+    <div>
+      <button id="signin">Start Gambling</button>
+      || 
+      <button id="signout">Stop Gambling</button>
+    </div>
+    <div>
+      <em>Pit Boss: Craps</em>
+    </div> 
+    <script src="/lib/jquery-2.0.3.min.js"></script>
+    <script src="/pit-boss-craps.js"></script>
   </body>
 </html>

@@ -40,11 +40,11 @@ describe('A degenerate gambler', function() {
     });
 
     it('creates a new gambler', function(done) {
-      var jerome = new Gambler({ name: 'Jerome Cardan' });
+      var jerome = new Gambler({ email: 'jeromec711@hotmail.com', name: 'Jerome Cardan' });
 
       // this feels unecessary...but it gets the job done
       _.defer(function() {
-        Gambler.find(jerome.id, function(err, gambler) {
+        Gambler.find(jerome.email, function(err, gambler) {
           expect(gambler).to.deep.equal(jerome);
           done();
         });
