@@ -1,5 +1,6 @@
 
-const request = require('request');
+const request = require('request'),
+      config = require('config');
 
 const Gambler = require('../lib/gambler');
 
@@ -19,7 +20,7 @@ module.exports.login = function(req,res) {
     url: 'https://verifier.login.persona.org/verify',
     form: {
       assertion: req.body.assertion,
-      audience: 'http://127.0.0.1:2312'
+      audience: 'http://' + config.webserver.host + ':' + config.webserver.port
     }
   };
 
