@@ -1,14 +1,13 @@
 const redis = require('redis'),
-      options = {
-        host: process.env.REDIS_HOST || '127.0.0.1',
-        port: process.env.REDIS_PORT || 6379
-      };
-// Would be nice to specifiy the DB too
-var client = redis.createClient(options);
+      config = require('config');
+
+var client = redis.createClient(config.redis.port, config.redis.host, config.redis);
+if(config.redis.db !== 0) client.select(config.redis.db); 
+
 module.exports = client;
 
 client.on('connect', function() {
-  console.log('redis ] connected');
+  console.log('redis ] connected on ' + config.redis.host + ':' + config.redis.port);
 });
 
 client.on('end', function() {

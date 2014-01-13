@@ -32,6 +32,7 @@
     "ws": "~0.4.31",
     "redis": "~0.10.0",
     "request": "~2.31.0",
-    "connect-redis": "~1.4.6"
+    "connect-redis": "~1.4.6",
+    "config": "~0.4.34"
   }
 }
