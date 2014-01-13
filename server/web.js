@@ -3,6 +3,7 @@ const config = require('config'),
       express = require('express'),
       redis = require('./db'),
       RedisStore = require('connect-redis')(express),
+      bodyParser = require('body-parser'),
       webserver = express(),
       auth = require('./auth');
 
@@ -18,7 +19,7 @@ webserver.use(express.session({
 }));
 
 webserver.use(express.static(process.cwd() + '/client'));
-webserver.use(express.bodyParser());
+webserver.use(bodyParser());
 
 webserver.post('/gambler/login', auth.login);
 webserver.all('/gambler/logout', auth.logout);

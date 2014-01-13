@@ -33,6 +33,7 @@
     "redis": "~0.10.0",
     "request": "~2.31.0",
     "connect-redis": "~1.4.6",
-    "config": "~0.4.34"
+    "config": "~0.4.34",
+    "body-parser": "~1.0.0"
   }
 }

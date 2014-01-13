@@ -3,7 +3,7 @@
 //
 const WebSocketServer = require('ws').Server,
   http = require('http'),
-  webserver = require('./server/webserver'),
+  webserver = require('./server/web'),
   crapserver = require('./server/craps'),
   config = require('config');
 
