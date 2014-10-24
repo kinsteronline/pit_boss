@@ -7,9 +7,10 @@ var concat = require('gulp-concat');
 var stylus = require('gulp-stylus');
 var del = require('del');
 
+var bowerFiles = require('main-bower-files');
+
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
-
 
 gulp.task('scripts', function() {
   return gulp.src('game/scripts/*.js')
@@ -19,6 +20,12 @@ gulp.task('scripts', function() {
     .pipe(concat('craps.js'))
     .pipe(gulp.dest('dist/'))
     .pipe(reload({ stream: true }));
+});
+
+gulp.task('libs', function() {
+  return gulp.src(bowerFiles({ debugging: true }))
+    .pipe(concat('libs.js'))
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('css', function() {
@@ -52,7 +59,7 @@ gulp.task('bs-reload', function() {
 });
 
 gulp.task('default', [ 'css', 'scripts', 'html', 'bs' ], function() {
-  gulp.watch('game/scripts/*.js', [ 'scripts']);
+  gulp.watch('game/scripts/*.js', ['scripts']);
   gulp.watch('game/*.html', [ 'html', 'bs-reload' ]);
 });
 
