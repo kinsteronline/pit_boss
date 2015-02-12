@@ -1,57 +1,50 @@
 'use strict';
 
-var gulp = require('gulp');
-var jshint = require('gulp-jshint');
-var es6transpiler = require('gulp-es6-transpiler');
-var concat = require('gulp-concat');
-var stylus = require('gulp-stylus');
 var del = require('del');
 
-var bowerFiles = require('main-bower-files');
+var gulp = require("gulp");
+var concat = require("gulp-concat");
+var six2five = require("gulp-6to5");
+var stylus = require('gulp-stylus');
 
-var browserSync = require('browser-sync');
+var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 
 var dirs = {
-  dist: 'static'
+  dist: "public",
+  client: "client",
+  server: "server"
 };
 
-gulp.task('scripts', function() {
-  return gulp.src('game/scripts/*.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(es6transpiler())
-    .pipe(concat('craps.js'))
+gulp.task("client-js", function() {
+  return gulp.src(dirs.clientSrc + "/**/*.js")
+    .pipe(six2five())
+    .pipe(concat("craps.js"))
     .pipe(gulp.dest(dirs.dist))
     .pipe(reload({ stream: true }));
 });
 
-gulp.task('libs', function() {
-  return gulp.src(bowerFiles({ debugging: true }))
-    .pipe(concat('libs.js'))
-    .pipe(gulp.dest(dirs.dist));
+gulp.task("client-lint", function() {
 });
 
 gulp.task('css', function() {
-  return gulp.src('./game/styles/*.styl')
+  return gulp.src(dirs.clientSrc + "/styles/*.styl")
     .pipe(stylus())
     .pipe(concat('craps.css'))
-    .pipe(gulp.dest(dirs.dist))
-    .pipe(reload({ stream: true }));
+    .pipe(gulp.dest(dirs.dist));
 });
 
 gulp.task('html', function() {
-  return gulp.src('game/*.html')
+  return gulp.src(dirs.clientSrc + "/*.html")
     .pipe(gulp.dest(dirs.dist));
 });
 
 gulp.task('clean', function(cb) {
-  return del([ dirs.dist + '/*.js' ], cb);
+  return del([ dirs.dist + "/*.*" ], cb);
 });
 
 gulp.task('bs', function() {
   browserSync({
-    browser: [ 'firefox', 'safari' ],
     server: {
       baseDir: dirs.dist,
     }
@@ -62,10 +55,8 @@ gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-//gulp.task('default', [ 'css', 'scripts', 'html', 'bs' ], function() {
-gulp.task('default', [ 'css', 'scripts', 'html' ], function() {
-  gulp.watch('game/scripts/*.js', ['scripts']);
-  //gulp.watch('game/*.html', [ 'html', 'bs-reload' ]);
-  gulp.watch('game/*.html', [ 'html' ]);
+gulp.task('default', [ 'client-js', 'html' ], function() {
+  gulp.watch(dirs.clientSrc + '/*.js', [ 'client-js' ]);
+  gulp.watch(dirs.clientSrc + '/*.html', [ 'html' ]);
 });
 
