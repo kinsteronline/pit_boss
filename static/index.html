@@ -4,11 +4,5 @@
     <title>pit boss craps</title>
   <body>
     Pit Boss Craps
-    <script>
-      var ws = new WebSocket('ws://localhost:2312');
-      ws.onopen = function openhandler(event) {
-        ws.send(JSON.stringify({ gambler: { name: 'Illinois Flats', chips: 16 }}));
-      };
-    </script>
   </body>
 </html>

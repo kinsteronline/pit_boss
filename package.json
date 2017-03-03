@@ -20,6 +20,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "ws": "^1.1.0"
+    "koa": "^2.0.1",
+    "ws": "^2.2.0"
   }
 }

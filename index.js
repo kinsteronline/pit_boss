@@ -1,19 +1,21 @@
-'use strict';
 
-const ws = require('ws');
+const host = process.env.HOST || '127.0.0.1'
+const port = parseInt(process.env.PORT, 10) || 2312
 
-const port = parseInt(process.env['PORT'], 10) || 2312;
-const wss = new ws.Server({ port });
+const Koa = require('koa')
+const server = new Koa()
 
-wss.on('connection', (ws) => {
-  console.log('connection');
+server.context.redis = 'redis'
 
-  ws.on('message', (msg) => {
-    console.log('in:message');
-    console.log(JSON.parse(msg));
-  });
-});
+server.use(async (ctx, next) => {
+  ctx.state.chips = '$ 4954'
+  await next()
+})
 
+server.use((ctx) => {
+  ctx.body = `pit boss craps: ${ctx.redis} ${ctx.state.chips}`
+})
 
-
-console.log(`WebSocket on port ${port}`);
+server.listen(port, host, function () {
+  console.log(`started on ${host}:${port}`)
+})
