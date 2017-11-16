@@ -1,10 +1,10 @@
 {
   "name": "pit_boss",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A crappy craps server.",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node --experimental-modules index"
   },
   "config": {
     "port": 2312
@@ -20,7 +20,5 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "koa": "^2.0.1",
-    "uws": "^0.13.0"
   }
 }
