@@ -1,19 +1,26 @@
-version: "3"
+version: "3.8"
 
 services:
-  redis:
-    image: redis:alpine
-    volumes:
-      - redis_data:/data
-    restart: always
-
-  house:
-    depends_on:
-      - redis
-    image: local/pit-boss/the-house:2
+  the-house:
+    build:
+      context: ./the-house
+      target: dev
+      args:
+        NODE_VERSION: 14.14.0
+    environment:
+      NODE_ENV: development
+      HTTP_PORT: 8080
+      HTTP_HOST: 0.0.0.0
+      DEBUG: "house"
+      DEBUG_HIDE_DATE: "true"
     ports:
-      - "2312:2312"
-    restart: always
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: ./the-house/server
+        target: /srv/server
+    networks:
+      - front-of-house
 
-volumes:
-  redis_data:
+networks:
+  front-of-house:

@@ -1,15 +1,14 @@
-FROM node:alpine
+ARG NODE_VERSION
+FROM node:$NODE_VERSION-buster-slim AS dev
 
 WORKDIR /srv
 
-COPY package.json .
-COPY yarn.lock .
-
-RUN yarn global add serve
+COPY package.json yarn.lock ./
 RUN yarn install
 
-COPY . .
+COPY ./server ./
 
-EXPOSE 2312/tcp
+RUN ls .
 
-CMD [ "serve", "-p", "2312" ]
+CMD ["yarn", "dev"]
+

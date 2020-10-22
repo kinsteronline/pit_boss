@@ -1,23 +1,27 @@
 {
   "name": "pit_boss",
-  "version": "0.9.0",
+  "version": "0.11.0",
   "description": "A crappy craps server.",
-  "main": "index.js",
   "scripts": {
-    "start": "node index"
-  },
-  "config": {
-    "port": 2312
+    "dev": "nodemon -r esm ./server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/kinsteronline/pit_boss.git"
   },
   "author": "kinsteronline",
-  "license": "BSD",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kinsteronline/pit_boss/issues"
   },
-  "devDependencies": {},
-  "dependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "debug": "^4.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "uuid": "^8.3.1",
+    "ws": "^7.3.1"
+  }
 }
