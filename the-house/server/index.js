@@ -1,6 +1,7 @@
 import WebSocket from 'ws'
 import express from 'express'
 import debugging from 'debug'
+import redis from 'redis'
 
 const debug = debugging('house')
 
@@ -9,13 +10,26 @@ const {
   HTTP_PORT = 8080,
   WS_HOST = '127.0.0.1',
   WS_PORT = 2312,
+  REDIS_URL = 'redis://127.0.0.1:6379',
 } = process.env
 
 debug('Setting up the webserver')
 
+const client = redis.createClient({ url: REDIS_URL })
+const ping = () => {
+  return new Promise((resolve, reject) => {
+    client.ping((err, reply) => {
+      if (err) return reject(err)
+      return resolve(reply)
+    })
+  })
+}
+
 const server = express()
-server.get('/', (req, res) => {
-  res.send('pit boss: craps (now copied)')
+server.get('/', async (req, res) => {
+  const data = await ping()
+  debug(data)
+  res.send('pit boss: craps (now copied and with datastore!)')
 })
 server.listen(HTTP_PORT, HTTP_HOST, () => {
   console.log(`PitBoss: ${HTTP_HOST}:${HTTP_PORT}`)

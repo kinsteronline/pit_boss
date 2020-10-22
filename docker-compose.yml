@@ -1,6 +1,11 @@
 version: "3.8"
 
 services:
+  keydb:
+    image: eqalpha/keydb
+    networks:
+      - back-of-house
+
   the-house:
     build:
       context: ./the-house
@@ -13,6 +18,7 @@ services:
       HTTP_HOST: 0.0.0.0
       DEBUG: "house"
       DEBUG_HIDE_DATE: "true"
+      REDIS_URL: "redis://keydb:6379"
     ports:
       - 8080:8080
     volumes:
@@ -21,6 +27,8 @@ services:
         target: /srv/server
     networks:
       - front-of-house
+      - back-of-house
 
 networks:
   front-of-house:
+  back-of-house:
