@@ -1,0 +1,21 @@
+{
+  "name": "the-house",
+  "version": "0.0.1",
+  "description": "The House always wins.",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./server/index.js",
+    "start": "node ./server/index.js"
+  },
+  "dependencies": {
+    "debug": "^4.3.2",
+    "express": "^4.17.1",
+    "ioredis": "^4.27.10",
+    "nanoid": "^3.1.29",
+    "ws": "^8.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
