@@ -1,6 +1,6 @@
 {
   "name": "the-house",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The House always wins.",
   "main": "server/index.js",
   "type": "module",
