@@ -1,0 +1,13 @@
+{
+  "name": "pit_boss",
+  "type": "module",
+  "module": "index.js",
+  "version": "0.4.4",
+  "private": true,
+  "scripts": {
+    "dev": "bun --host server.ts"
+  },
+  "dependencies": {
+    "bun-types": "^0.5.8"
+  }
+}

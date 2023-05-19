@@ -1,0 +1,72 @@
+
+:root {
+  --font-body: 'Andale Mono';
+  --font-heading: 'Phosphate';
+
+  --color-bg: #151415;
+  /* good white: --color-fg: #F2F5F4; */
+
+  /* good with #3ADE97 --color-fg: #70FFC1; */
+  /* --color-fg: #13A85D; */
+  --color-fg: #27f5f5ff;
+  --color-highlight: #88FCC2;
+
+  /* --color-primary: #42BFDD; */
+
+  /* like: --color-primary: #B0DB43; */
+  /* not bad: --color-primary: #01782B; */
+  /* not bad either: --color-primary: #09E832; */
+
+  /* --color-primary: #3ADE97; */
+
+  /* --color-primary: #0FFA84; */
+  --color-primary: #27f5f5ff;
+
+  /* not a bad dark blue: --color-primary: #18314F; */
+  /* mediocre red: --color-primary: #DB5461; */
+
+  /* dull looking good gray: --color-primary: #888DA7; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* could get a real normalize... */
+html, body {
+  font-family: var(--font-body);
+  font-size: 16px;
+
+  background-color: var(--color-bg);
+  background-color: #000;
+  color: var(--color-fg);
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+a {
+  color: var(--color-highlight);
+}
+
+h1 {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 3em;
+}
+
+.container {
+  padding: 1em;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
