@@ -2,6 +2,8 @@ import { type Serve } from 'bun'
 import { resolve } from 'path'
 import { getRandomValues, randomUUID } from 'crypto'
 
+const { floor } = Math
+
 function die(): number {
   //
   // Learn: implications of 8 v 32: It's "more" randomness with 32
@@ -12,7 +14,7 @@ function die(): number {
   // multiplied by the "max" random number so it's 0 ... n - 1
   // and then add 1 so that you're not returning a zero based
   // number
-  return Math.floor(value / 2**8 * 6 + 1)
+  return floor(value / 2**8 * 6 + 1)
 }
 
 async function app({ url, method }: Request): Response {
@@ -22,21 +24,22 @@ async function app({ url, method }: Request): Response {
 
   // return new Response(pathname)
 
-  if (pathname === '/index.css') {
-    return new Response(Bun.file(resolve(import.meta.dir, './index.css')))
-  }
+  // if (pathname === '/index.css') {
+  //   return new Response(Bun.file(resolve(import.meta.dir, './index.css')))
+  // }
+  //
+  // if (pathname === '/' || pathname === '/index.html') {
+  //   return new Response(Bun.file(resolve(import.meta.dir, './index.html')))
+  // }
+  //
+  // return new Response('Crapped Out!!', { status: 404, statusText: 'crappedout' })
 
-  if (pathname === '/' || pathname === '/index.html') {
-    return new Response(Bun.file(resolve(import.meta.dir, './index.html')))
-  }
-
-  return new Response('Crapped Out!!', { status: 404, statusText: 'crappedout' })
-
-  // return Response.json({
-  //   icon: `[${die()}][${die()}]`,
-  //   name: 'PitBoss: Craps',
-  //   uuid: randomUUID(),
-  // })
+  return Response.json({
+    icon: `[${die()}][${die()}]`,
+    name: 'PitBoss: Craps',
+    uuid: randomUUID(),
+    chips: 1_000_000,
+  })
 }
 
 export default {
