@@ -2,10 +2,10 @@
   "name": "pit_boss",
   "type": "module",
   "module": "index.js",
-  "version": "0.4.4",
+  "version": "0.4.005",
   "private": true,
   "scripts": {
-    "dev": "bun --host server.ts"
+    "dev": "bun --hot run server.ts"
   },
   "dependencies": {
     "bun-types": "^0.5.8"

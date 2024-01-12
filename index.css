@@ -1,31 +1,36 @@
 
 :root {
-  --font-body: 'Andale Mono';
-  --font-heading: 'Andale Mono';
+  /* --font-body: 'Andale Mono'; */
+  --font-body: 'Menlo';
+  /* --font-heading: 'Andale Mono'; */
+  --font-heading: 'Menlo';
 
   --color-bg: #151415;
+  --color-black: #000;
   /* good white: --color-fg: #F2F5F4; */
 
-  /* good with #3ADE97 --color-fg: #70FFC1; */
-  /* --color-fg: #13A85D; */
-  --color-fg: #27f5f5ff;
+  /* --color-fg: #3ADE97; */
+  /* --color-fg: #70FFC1; */
+
+  --color-fg: #13A85D; /* <-- Winner */
+  /* --color-fg: #27f5f5; */
   --color-highlight: #88FCC2;
 
-  /* --color-primary: #42BFDD; */
+  --color-secondary: #42BFDD;
 
   /* like: --color-primary: #B0DB43; */
   /* not bad: --color-primary: #01782B; */
   /* not bad either: --color-primary: #09E832; */
 
-  /* --color-primary: #3ADE97; */
-
+  --color-primary: #3ADE97;
   /* --color-primary: #0FFA84; */
-  --color-primary: #27f5f5ff;
+  /* --color-primary: #27f5f5; */
 
   /* not a bad dark blue: --color-primary: #18314F; */
   /* mediocre red: --color-primary: #DB5461; */
+  --color-negative: #BC4749;
 
-  /* dull looking good gray: --color-primary: #888DA7; */
+  --color-muted: #888DA7;
 }
 
 * {
@@ -38,7 +43,6 @@ html, body {
   font-size: 16px;
 
   background-color: var(--color-bg);
-  background-color: #000;
   color: var(--color-fg);
 
   margin: 0;
@@ -70,3 +74,40 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+.hidden {
+  display: none;
+}
+
+#logger {
+  border: 1px solid #3D4052; /* var(--color-muted) */
+  border-left-width: 7px;
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  background-color: var(--color-black);
+  padding: 2px 4px;
+  margin: 0.5rem;
+  min-width: 24rem;
+  min-height: 8rem;
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  .control {
+    color: var(--color-secondary);
+    margin-bottom: 2px;
+  }
+
+  .entries {
+    color: var(--color-muted);
+    margin-bottom: 2px;
+    overflow-y: scroll;
+
+    .negative {
+      color: var(--color-negative);
+    }
+  }
+}
+
+
