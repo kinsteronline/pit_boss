@@ -1,4 +1,4 @@
-import { type Serve } from 'bun'
+import { Hono } from 'hono'
 import { getRandomValues, randomUUID } from 'crypto'
 
 const { floor } = Math
@@ -15,34 +15,16 @@ function die(): number {
   // number
   return floor(value / 2 ** 8 * 6 + 1)
 }
-
-async function app({ url, method }: Request): Promise<Response> {
-  const { pathname } = new URL(url)
-
-  console.log(`${method} ~> ${pathname}`)
-
-  if (pathname === '/' || pathname === '/index.html') {
-    return new Response(Bun.file('./index.html'))
-  }
-
-  if (!pathname.includes('.')) {
-    return new Response(Bun.file(`./${pathname}.js`))
-  }
-
-  return new Response(Bun.file(`.${pathname}`))
-
-  // return new Response('Crapped Out!!', { status: 404, statusText: 'crappedout' })
-
-  // return Response.json({
-  //   icon: `[${die()}][${die()}]`,
-  //   name: 'PitBoss: Craps',
-  //   uuid: randomUUID(),
-  //   chips: 1_000_000,
-  // })
-}
+const app = new Hono()
+app.get('/', (c) => {
+  return c.json({
+    gamblerId: randomUUID(),
+    chips: 1_000_000,
+    dice: `[${die()}][${die()}]`,
+  })
+})
 
 export default {
   port: 2312,
-  fetch: app,
-} satisfies Serve
-
+  fetch: app.fetch
+}
