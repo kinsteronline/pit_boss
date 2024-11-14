@@ -1,0 +1,16 @@
+services:
+  server:
+    networks:
+      - front-of-house
+      - back-of-house
+  client:
+    networks:
+      - front-of-house
+      - back-of-house
+
+networks:
+  front-of-house:
+  back-of-house:
+
+volumes:
+  db-data:
