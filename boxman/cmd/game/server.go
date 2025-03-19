@@ -20,3 +20,6 @@ func (*game) homePageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	io.WriteString(w, fmt.Sprintf("<html><body style=\"background:#000;color:#aaa\">Boxman %s</body></html>", version))
 }
+
+func (*game) websocketHandler(w http.ResponseWriter, r *http.Request) {
+}
