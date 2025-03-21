@@ -8,6 +8,8 @@ import (
 
 	"github.com/charmbracelet/log"
 	"kinster.com/boxman/internal/craps"
+	"kinster.com/boxman/internal/infra"
+	"kinster.com/boxman/internal/server"
 )
 
 // Interesante
@@ -16,50 +18,40 @@ import (
 //   $ go build -ldflags="-X 'main.version=1.0.1'" -o myapp
 
 const (
-	version = "0.0.3"
+	Version = "0.0.3"
 )
 
-type config struct {
-	addr  string
-	env   string
-	debug bool
-}
-
-type server struct {
-	config config
-	logger *log.Logger
-}
-
 func main() {
-	var cfg config
-	flag.StringVar(&cfg.addr, "addr", ":2312", "Game server address")
-	flag.StringVar(&cfg.env, "env", "dev", "Environment (dev|tst|prd)")
-	flag.BoolVar(&cfg.debug, "debug", false, "Show debug logging")
+	var config infra.Config
+
+	flag.StringVar(&config.Addr, "addr", ":2312", "Game server address")
+	flag.StringVar(&config.Env, "env", "dev", "Environment (dev|tst|prd)")
+	flag.BoolVar(&config.Debug, "debug", false, "Show debug logging")
 	flag.Parse()
 
-	srv := &server{
-		config: cfg,
-		logger: newLoggerWithConfig(cfg),
-	}
+	logger := newLoggerWithConfig(config)
+	srv := server.NewServer(config, logger)
 
-	http.HandleFunc("/", srv.homePageHandler)
-	srv.logger.Info(fmt.Sprintf("PitBoss ⚀ Boxman ⚁ Ver.%s (%s)", version, srv.config.env))
+	http.HandleFunc("/", srv.HomePageHandler)
+	srv.Logger.Info(fmt.Sprintf("PitBoss ⚀ Boxman ⚁ Ver.%s (%s)", Version, srv.Config.Env))
 
 	crapsGame := craps.NewGame()
-	srv.logger.Debug("Starting a new single table game", "game", crapsGame.String())
+	srv.Logger.Debug("Starting a new single table game", "game", crapsGame.String())
 
-	srv.logger.Fatal(http.ListenAndServe(srv.config.addr, nil))
+	err := http.ListenAndServe(srv.Config.Addr, nil)
+	srv.Logger.Fatal(err)
+	os.Exit(1)
 }
 
-func newLoggerWithConfig(config config) *log.Logger {
+func newLoggerWithConfig(config infra.Config) *log.Logger {
 	level := log.InfoLevel
-	if config.debug {
+	if config.Debug {
 		level = log.DebugLevel
 	}
 
 	return log.NewWithOptions(os.Stdout, log.Options{
-		ReportCaller:    config.env == "dev",
-		ReportTimestamp: config.env == "prd",
+		ReportCaller:    config.Env == "dev",
+		ReportTimestamp: config.Env == "prd",
 		Level:           level,
 	})
 }
