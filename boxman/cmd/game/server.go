@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func (*game) homePageHandler(w http.ResponseWriter, r *http.Request) {
+func (*server) homePageHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.Error(w, "404", http.StatusNotFound)
 		return
@@ -21,5 +21,5 @@ func (*game) homePageHandler(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, fmt.Sprintf("<html><body style=\"background:#000;color:#aaa\">Boxman %s</body></html>", version))
 }
 
-func (*game) websocketHandler(w http.ResponseWriter, r *http.Request) {
+func (*server) websocketHandler(w http.ResponseWriter, r *http.Request) {
 }

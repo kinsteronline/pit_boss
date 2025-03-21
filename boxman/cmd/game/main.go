@@ -7,7 +7,13 @@ import (
 	"os"
 
 	"github.com/charmbracelet/log"
+	"kinster.com/boxman/internal/craps"
 )
+
+// Interesante
+//   var version = "dev"
+// and then
+//   $ go build -ldflags="-X 'main.version=1.0.1'" -o myapp
 
 const (
 	version = "0.0.3"
@@ -19,7 +25,7 @@ type config struct {
 	debug bool
 }
 
-type game struct {
+type server struct {
 	config config
 	logger *log.Logger
 }
@@ -31,15 +37,18 @@ func main() {
 	flag.BoolVar(&cfg.debug, "debug", false, "Show debug logging")
 	flag.Parse()
 
-	game := &game{
+	srv := &server{
 		config: cfg,
 		logger: newLoggerWithConfig(cfg),
 	}
 
-	http.HandleFunc("/", game.homePageHandler)
-	game.logger.Info(fmt.Sprintf("PitBoss ⚀ Boxman ⚁ Ver.%s (%s)", version, game.config.env))
-	game.logger.Debug("What the shit am I even doing?")
-	game.logger.Fatal(http.ListenAndServe(game.config.addr, nil))
+	http.HandleFunc("/", srv.homePageHandler)
+	srv.logger.Info(fmt.Sprintf("PitBoss ⚀ Boxman ⚁ Ver.%s (%s)", version, srv.config.env))
+
+	crapsGame := craps.NewGame()
+	srv.logger.Debug("Starting a new single table game", "game", crapsGame.String())
+
+	srv.logger.Fatal(http.ListenAndServe(srv.config.addr, nil))
 }
 
 func newLoggerWithConfig(config config) *log.Logger {
