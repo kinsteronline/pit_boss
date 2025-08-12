@@ -14,7 +14,7 @@ type Game struct {
 	Bets    map[string]*Bet
 }
 
-func NewGame() *Game {
+func New() *Game {
 	id, _ := nanoid.New(8)
 
 	return &Game{
@@ -23,23 +23,5 @@ func NewGame() *Game {
 }
 
 func (g *Game) String() string {
-	return fmt.Sprintf("[Game]%s", g.ID)
-}
-
-func (g *Game) JoinTable(tableID string, gamblerID string) error {
-	// If table is full, for example
-	// Correctly use errors!
-	//
-	// find table by id
-	// find gambler by id
-	// join a table and return the state? how?
-	//
-
-	// err := g.Table.Join(gambler)
-	return nil
-}
-
-func (g *Game) LeaveTable(tableID string, gamblerID string) error {
-	// err := g.Table.Leave(gambler)
-	return nil
+	return fmt.Sprintf("[Game] %s", g.ID)
 }

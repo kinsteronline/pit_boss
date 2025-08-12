@@ -5,12 +5,12 @@ import "fmt"
 type Bet struct {
 	ID        string `json:"id"`
 	Bettor    *Gambler
-	Type      string
-	Amount    uint `json:"amount"`
+	Type      BetType
+	Amount    int `json:"amount"`
 	Paid      bool
-	Timestamp uint
+	Timestamp int
 }
 
 func (b *Bet) String() string {
-	return fmt.Sprintf("[Bet] %s: c:%d", b.ID, b.Amount)
+	return fmt.Sprintf("[Bet] %s: chips:%d", b.ID, b.Amount)
 }

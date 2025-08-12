@@ -9,11 +9,11 @@ import (
 type Table struct {
 	ID       string     `json:"id"`
 	Gamblers []*Gambler `json:"gamblers"`
-	Capacity uint       `json:"capacity"`
-	Minimum  uint       `json:"minimum"`
+	Capacity int        `json:"capacity"`
+	Minimum  int        `json:"minimum"`
 }
 
-func NewTable(capacity uint, minimum uint) *Table {
+func NewTable(capacity, minimum int) *Table {
 	id, _ := nanoid.New(8)
 
 	return &Table{
@@ -25,7 +25,11 @@ func NewTable(capacity uint, minimum uint) *Table {
 }
 
 func (t *Table) String() string {
-	return fmt.Sprintf("[Table] %s", t.ID)
+	return fmt.Sprintf("[Table] %s (%d/%d)", t.ID, t.Count(), t.Capacity)
+}
+
+func (t *Table) Count() int {
+	return len(t.Gamblers)
 }
 
 func (t *Table) Join(gambler *Gambler) error {
