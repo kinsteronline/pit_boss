@@ -21,13 +21,13 @@ func NewServer(config infra.Config, logger *log.Logger) *Server {
 }
 
 func (s *Server) HomePageHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Error(w, "404", http.StatusNotFound)
+	if r.Method != http.MethodGet {
+		http.Error(w, "405", http.StatusMethodNotAllowed)
 		return
 	}
 
-	if r.Method != http.MethodGet {
-		http.Error(w, "405", http.StatusMethodNotAllowed)
+	if r.URL.Path != "/" {
+		http.Error(w, "404", http.StatusNotFound)
 		return
 	}
 
