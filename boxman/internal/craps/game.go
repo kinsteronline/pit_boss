@@ -14,7 +14,7 @@ type Game struct {
 	Bets    map[string]*Bet
 }
 
-func New() *Game {
+func NewGame() *Game {
 	id, _ := nanoid.New(8)
 
 	return &Game{

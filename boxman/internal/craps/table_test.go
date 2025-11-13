@@ -1,11 +1,28 @@
 package craps
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestNewTable(t *testing.T) {
-	got := NewTable(10, 5)
+	t.Run("should be empty of degenerate gamblers", func(t *testing.T) {
+		table := NewTable(10, 100)
+		got := table.Count()
+		want := 0
 
-	if got == nil {
-		t.Error("Did not create a table")
-	}
+		if got != want {
+			t.Errorf("got %d want %d", got, want)
+		}
+	})
+	t.Run("should have an ID", func(t *testing.T) {
+		table := NewTable(10, 5)
+
+		fmt.Printf("table: %+v\n", table)
+
+		got := table.ID
+		if got == "" {
+			t.Error("expecting an ID got nil")
+		}
+	})
 }

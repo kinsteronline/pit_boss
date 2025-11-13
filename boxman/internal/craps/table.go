@@ -1,6 +1,7 @@
 package craps
 
 import (
+	"errors"
 	"fmt"
 
 	nanoid "github.com/matoous/go-nanoid/v2"
@@ -29,11 +30,22 @@ func (t *Table) String() string {
 }
 
 func (t *Table) Count() int {
-	return len(t.Gamblers)
+	count := 0
+	for _, g := range t.Gamblers {
+		if g != nil {
+			count++
+		}
+	}
+	return count
 }
 
 func (t *Table) Join(gambler *Gambler) error {
-	// err: Table at capacity
+	if cap(t.Gamblers) == t.Count() {
+		return errors.New("Table is full")
+	}
+
+	// If the Gambler is already at the table it's a noop
+
 	return nil
 }
 
